@@ -69,3 +69,8 @@ This runs the `npm run build` script (no purge css) and then starts your hugo se
 ## Deployment
 When you're ready for deployment, you can use the `npm run deploy` script to build all the production assets.
 There is also a helpful `netlify.toml` file in the root directory if you choose to use netlify as your hosting service.
+
+
+## Special Thanks
+* [Hugo Ink](https://github.com/knadh/hugo-ink) some snippets of code were copied/borrowed from this theme
+* [Shruti Balasa](https://www.shrutibalasa.com/) for the [Youtube guide on setting up TailwindCSS & PurgeCSS](https://www.youtube.com/watch?v=hvm5-EGe3fU)

@@ -1,0 +1,65 @@
+baseURL = "http://localhost:1313/"
+languageCode = "en-us"
+title = "Page Name Here"
+paginate = 10
+
+copyright = "© Your Name Here"
+
+pygmentsstyle = "vs"
+pygmentscodefences = true
+pygmentscodefencesguesssyntax = true
+
+googleAnalytics = ""
+
+[params]
+	subtitle = "Here is where the page subtitle goes"
+
+	avatar = "https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+	
+	featherIconsCDN = true
+	favicon = "/favicon.ico"
+	mode = "auto" # "dark" or "auto"
+	
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+
+# Nav.
+[menu]
+    [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+
+    [[menu.main]]
+    name = "Tags"
+    url = "/tags/"
+    weight = 2
+
+    [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 3
+
+[[params.social]]
+name = "Github"
+icon = "github"
+url = "https://github.com"
+
+[[params.social]]
+name = "Twitter"
+icon = "twitter"
+url = "https://twitter.com"
+
+[[params.social]]
+name = "RSS"
+icon = "rss"
+url = "/index.xml"
+
+[taxonomies]
+   tag = "tags"
+
+PygmentsCodeFences = true
+PygmentsStyle = "monokai"

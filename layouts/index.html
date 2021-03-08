@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+{{ partial "header.html" . }}
+<body>
+{{ partial "head.html" . }}
+<header>
+	<h1 class="text-3xl font-bold leading-tight text-gray-900">
+        {{ .Name }}
+	</h1>
+	{{ if isset .Site.Params "subtitle" }}
+	<p>{{ .Site.Params.Subtitle | markdownify }}</p>
+	{{ end }}
+</header>
+<main>
+    <div class="max-w-7xl mx-auto p-4">
+        {{ .Content }}
+
+        <div class="posts mt-4">
+            {{ $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
+            {{ $paginator := .Paginate (where $pages "Params.hidden" "ne" true) }}
+            {{ range $paginator.Pages }}
+            <div class="item mb-4 p-4">
+                <div class="item">
+					<div class="date">
+						{{ if $.Site.Data.month }}{{ index $.Site.Data.month (printf "%d" .Date.Month) }} {{ .Date.Year }}{{ else }}{{ dateFormat "Jan 02 2006" .Date }}{{ end }}
+					</div>
+					<div class="item-content">
+						<h4 class="item-title">
+							<a class="text-blue-400" href="{{ .RelPermalink }}">{{.Title}}
+								{{ if .Draft }}<sup class="draft-label">DRAFT</sup>{{ end }}
+							</a>
+						</h4>
+						<span class="description">
+							{{ if isset .Params "description" }}
+							{{ .Description }}
+							{{ else if gt (countrunes .RawContent) 120 }}
+							{{ slicestr .RawContent 0 120 }}...
+							{{ else }}
+							{{ .RawContent }}
+							{{ end }}
+						</span>
+					</div>
+				</div>
+            </div>
+            <hr class="border-gray-100 border my-2 md:w-1/2"/>
+            {{ end }}
+            {{ template "partials/paginator.html" . }}
+        </div>
+    </div>
+</main>
+{{ partial "footer.html" . }}
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+{{ partial "header.html" . }}
+
+<body>
+{{ partial "head.html" . }}
+<header>
+	<h1 class="text-3xl font-bold leading-tight text-gray-900">
+		{{ if isset .Data "Term" }}
+			{{ .Data.Term }}
+		{{ else }}
+			{{ .Name }}
+		{{ end }}
+	</h1>
+	{{ if isset .Site.Params "subtitle" }}
+	<p>{{ .Site.Params.Subtitle | markdownify }}</p>
+	{{ end }}
+</header>
+<main>
+	<div class="max-w-7xl mx-auto p-4">
+		{{ .Content }}
+		<ul class="mt-4">
+			{{- range .Data.Pages -}}
+			{{- if (in (.Site.Params.excludedTypes | default (slice "page")) .Type) -}}
+			{{- else -}}
+			<li class="mb-4">
+				<div class="item">
+					<div class="date">
+						{{ if $.Site.Data.month }}{{ index $.Site.Data.month (printf "%d" .Date.Month) }} {{ .Date.Year }}{{ else }}{{ dateFormat "Jan 02 2006" .Date }}{{ end }}
+					</div>
+					<div class="item-content">
+						<h4 class="item-title">
+							<a class="text-blue-400" href="{{ .RelPermalink }}">{{.Title}}
+								{{ if .Draft }}<sup class="draft-label">DRAFT</sup>{{ end }}
+							</a>
+						</h4>
+						<span class="description">
+							{{ if isset .Params "description" }}
+							{{ .Description }}
+							{{ else if gt (countrunes .RawContent) 120 }}
+							{{ slicestr .RawContent 0 120 }}...
+							{{ else }}
+							{{ .RawContent }}
+							{{ end }}
+						</span>
+					</div>
+				</div>
+			</li>
+			{{- end -}}
+			{{- end -}}
+		</ul>
+	</div>
+</main>
+{{ partial "footer.html" . }}
+</body>
+
+</html>
